@@ -11,13 +11,15 @@
     <main>
         <div class="todo-container">
             <h1>Todo List</h1>
-            <form id="todo-form">
-              <input type="text" id="todo-input" placeholder="Add new task...">
-              <button type="submit">Add</button>
+            <form class="todo-container__form">
+              <input type="text" class="todo-container__input" placeholder="Add new task...">
+              <button class="todo-container__addBtn" type="submit">Add</button>
             </form>
-            <ul id="todo-list"></ul>
-            <button id="delete-button">Delete Selected</button>
-            <button id="delete-all-button">Delete All</button>
+            <ul class="todo-container__list">
+
+            </ul>
+            <button class="todo-container__delBtn">Delete Selected</button>
+            <button class="todo-container__delAllBtn">Delete All</button>
           </div>
         <script src="index.js"></script>
     </main>

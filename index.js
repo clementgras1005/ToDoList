@@ -1,9 +1,8 @@
-const form = document.getElementById('todo-form');
-const todoInput = document.getElementById('todo-input');
-const todoList = document.getElementById('todo-list');
-const deleteButton = document.getElementById('delete-button');
-const deleteAllButton = document.getElementById('delete-all-button');
-
+const form = document.querySelector('.todo-container__form');
+const todoInput = document.querySelector('.todo-container__input');
+const todoList = document.querySelector('.todo-container__list');
+const deleteButton = document.querySelector('.todo-container__delBtn');
+const deleteAllButton = document.querySelector('.todo-container__delAllBtn');
 let todos = [];
 
 // Load todos from local storage
@@ -13,27 +12,6 @@ const loadTodos = () => {
     todos = JSON.parse(todosString);
   }
   renderTodos();
-}
-
-// Save todos to local storage
-const saveTodos = () => {
-  localStorage.setItem('todos', JSON.stringify(todos));
-}
-
-// Add new todo to list
-const addTodo = (event) => {
-  event.preventDefault();
-  const todoText = todoInput.value.trim();
-  if (todoText.length > 0) {
-    todos.push({
-      text: todoText,
-      completed: false,
-      selected: false
-    });
-    todoInput.value = '';
-    saveTodos();
-    renderTodos();
-  }
 }
 
 // Render all todos
@@ -58,6 +36,28 @@ const renderTodos = () => {
     });
     todoList.appendChild(li);
   });
+}
+
+
+// Save todos to local storage
+const saveTodos = () => {
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+// Add new todo to list
+const addTodo = (event) => {
+  event.preventDefault();
+  const todoText = todoInput.value.trim();
+  if (todoText.length > 0) {
+    todos.push({
+      text: todoText,
+      completed: false,
+      selected: false
+    });
+    todoInput.value = '';
+    saveTodos();
+    renderTodos();
+  }
 }
 
 // Toggle todo completion status
@@ -96,18 +96,7 @@ const deleteAllTodos = () => {
   todos = [];
   saveTodos();
   renderTodos();
-}
 
-// Select all todos
-const selectAllTodos = () => {
-  todos.forEach((todo) => todo.selected = true);
-  renderTodos();
-}
-
-// Deselect all todos
-const deselectAllTodos = () => {
-  todos.forEach((todo) => todo.selected = false);
-  renderTodos();
 }
 
 // Event listeners
@@ -124,8 +113,6 @@ todoList.addEventListener('click', (event) => {
     todos[target.id.split('-')[1]].selected = true;
   }
 });
-document.getElementById('select-all').addEventListener('click', selectAllTodos);
-document.getElementById('deselect-all').addEventListener('click', deselectAllTodos);
 
 // Load initial todos from local storage
 loadTodos();
